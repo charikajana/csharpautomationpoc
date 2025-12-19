@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.reqnroll.net/reqnroll-config-latest.json",
+    "language": {
+        "feature": "en"
+    },
+    "bindingCulture": {
+        "name": "en-US"
+    },
+    "runtime": {
+        "missingOrPendingStepsOutcome": "Error",
+        "stopAtFirstError": false,
+        "obsoleteBehavior": "Warn"
+    },
+    "trace": {
+        "stepDefinitionSkeletonStyle": "MethodNameUnderscores",
+        "traceSuccessfulSteps": true,
+        "traceTimings": false,
+        "minTracedDuration": "0:0:0.1"
+    },
+    "generator": {
+        "addNonParallelizableMarkerForTags": [
+            "sequential",
+            "database"
+        ],
+        "allowDebugGeneratedFiles": false,
+        "allowRowTests": true
+    }
+}

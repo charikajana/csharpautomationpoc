@@ -1,8 +1,21 @@
 {
     "allure": {
         "directory": "allure-results",
-        "links": [
-            "https://example.com/item/{link}"
-        ]
+        "links": [],
+        "title": "C# Playwright Automation Results"
+    },
+    "reqnroll": {
+        "links": {
+            "link": "^link:(.+)$",
+            "issue": "^issue:(.+)$",
+            "tms": "^tms:(.+)$"
+        }
+    },
+    "specflow": {
+        "links": {
+            "link": "^link:(.+)$",
+            "issue": "^issue:(.+)$",
+            "tms": "^tms:(.+)$"
+        }
     }
 }

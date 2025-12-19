@@ -31,7 +31,7 @@ namespace CSharpAutomation.Tests.Features.Newfeatures
                 "sanity",
                 "Regression"};
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features/Newfeatures", "looking for Login to Sabre Hotel Booker", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en"), "Features/Newfeatures", "looking for Login to Sabre Hotel Booker", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
 #line 1 "basic.feature"
 #line hidden

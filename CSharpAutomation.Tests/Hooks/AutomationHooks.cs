@@ -3,6 +3,8 @@ using CSharpAutomation.Tests.Utils;
 using Reqnroll;
 using System.Text;
 using System.Runtime.InteropServices;
+using Allure.Net.Commons;
+using Microsoft.Extensions.Configuration;
 
 namespace CSharpAutomation.Tests.Hooks
 {
@@ -12,6 +14,7 @@ namespace CSharpAutomation.Tests.Hooks
         private readonly DriverFactory _driverFactory;
         private readonly ScenarioContext _scenarioContext;
         private readonly FeatureContext _featureContext;
+        private readonly IConfiguration _configuration;
         
         // Static fields to store the report directory paths for the current test run
         private static string? _reportBaseDir;
@@ -19,11 +22,12 @@ namespace CSharpAutomation.Tests.Hooks
         private static string? _allureReportDir;
         private static DateTime _testRunStartTime;
 
-        public AutomationHooks(DriverFactory driverFactory, ScenarioContext scenarioContext, FeatureContext featureContext)
+        public AutomationHooks(DriverFactory driverFactory, ScenarioContext scenarioContext, FeatureContext featureContext, IConfiguration configuration)
         {
             _driverFactory = driverFactory;
             _scenarioContext = scenarioContext;
             _featureContext = featureContext;
+            _configuration = configuration;
         }
 
         [BeforeTestRun]
@@ -285,6 +289,42 @@ namespace CSharpAutomation.Tests.Hooks
         public void BeforeScenario()
         {
             Logger.Step($"Scenario: {_scenarioContext.ScenarioInfo.Title}");
+
+            // Retrieve URLs from Configuration
+            string IssueBaseUrl = _configuration["Links:Issue"] ?? "https://github.com/your-org/your-repo/issues/";
+            string TmsBaseUrl = _configuration["Links:Tms"] ?? "https://jira.yourcompany.com/browse/";
+            string GenericLinkBaseUrl = _configuration["Links:Generic"] ?? "https://yourcompany.atlassian.net/browse/";
+
+            foreach (var tag in _scenarioContext.ScenarioInfo.Tags)
+            {
+                if (tag.StartsWith("issue:"))
+                {
+                    var id = tag.Substring("issue:".Length);
+                    AllureLifecycle.Instance.UpdateTestCase(t => 
+                    {
+                        t.links.Add(new Link { name = id, type = "issue", url = IssueBaseUrl + id });
+                        t.labels.RemoveAll(l => l.name == "tag" && l.value == tag);
+                    });
+                }
+                else if (tag.StartsWith("tms:"))
+                {
+                    var id = tag.Substring("tms:".Length);
+                    AllureLifecycle.Instance.UpdateTestCase(t => 
+                    {
+                        t.links.Add(new Link { name = id, type = "tms", url = TmsBaseUrl + id });
+                        t.labels.RemoveAll(l => l.name == "tag" && l.value == tag);
+                    });
+                }
+                else if (tag.StartsWith("link:"))
+                {
+                    var id = tag.Substring("link:".Length);
+                    AllureLifecycle.Instance.UpdateTestCase(t => 
+                    {
+                        t.links.Add(new Link { name = id, type = "link", url = GenericLinkBaseUrl + id });
+                        t.labels.RemoveAll(l => l.name == "tag" && l.value == tag);
+                    });
+                }
+            }
         }
 
         [AfterScenario]

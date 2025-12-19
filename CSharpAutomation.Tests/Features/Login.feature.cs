@@ -29,7 +29,7 @@ namespace CSharpAutomation.Tests.Features
         private static string[] featureTags = new string[] {
                 "Regression"};
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Login to Sabre Hotel Booker", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en"), "Features", "Login to Sabre Hotel Booker", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
 #line 1 "Login.feature"
 #line hidden
@@ -112,10 +112,16 @@ namespace CSharpAutomation.Tests.Features
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("Successful Login new with valid credentials")]
+        [global::NUnit.Framework.CategoryAttribute("issue:BUG-100")]
+        [global::NUnit.Framework.CategoryAttribute("tms:TC-001")]
+        [global::NUnit.Framework.CategoryAttribute("link:REQ-LOGIN-01")]
         [global::NUnit.Framework.CategoryAttribute("LoginTest")]
         public async global::System.Threading.Tasks.Task SuccessfulLoginNewWithValidCredentials()
         {
             string[] tagsOfScenario = new string[] {
+                    "issue:BUG-100",
+                    "tms:TC-001",
+                    "link:REQ-LOGIN-01",
                     "LoginTest"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "0";
