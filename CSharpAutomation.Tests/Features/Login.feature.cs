@@ -21,13 +21,17 @@ namespace CSharpAutomation.Tests.Features
     [global::NUnit.Framework.DescriptionAttribute("Login to Sabre Hotel Booker")]
     [global::NUnit.Framework.FixtureLifeCycleAttribute(global::NUnit.Framework.LifeCycle.InstancePerTestCase)]
     [global::NUnit.Framework.CategoryAttribute("Regression")]
+    [global::NUnit.Framework.CategoryAttribute("epic:Authentication")]
+    [global::NUnit.Framework.CategoryAttribute("feature:Login")]
     public partial class LoginToSabreHotelBookerFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = new string[] {
-                "Regression"};
+                "Regression",
+                "epic:Authentication",
+                "feature:Login"};
         
         private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en"), "Features", "Login to Sabre Hotel Booker", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
@@ -116,19 +120,25 @@ namespace CSharpAutomation.Tests.Features
         [global::NUnit.Framework.CategoryAttribute("tms:TC-001")]
         [global::NUnit.Framework.CategoryAttribute("link:REQ-LOGIN-01")]
         [global::NUnit.Framework.CategoryAttribute("LoginTest")]
+        [global::NUnit.Framework.CategoryAttribute("story:Valid_Login")]
+        [global::NUnit.Framework.CategoryAttribute("owner:QA-Team")]
+        [global::NUnit.Framework.CategoryAttribute("severity:critical")]
         public async global::System.Threading.Tasks.Task SuccessfulLoginNewWithValidCredentials()
         {
             string[] tagsOfScenario = new string[] {
                     "issue:BUG-100",
                     "tms:TC-001",
                     "link:REQ-LOGIN-01",
-                    "LoginTest"};
+                    "LoginTest",
+                    "story:Valid_Login",
+                    "owner:QA-Team",
+                    "severity:critical"};
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "0";
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Successful Login new with valid credentials", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 5
+#line 6
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -138,16 +148,16 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 6
+#line 7
     await testRunner.GivenAsync("I navigate to the login page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 7
+#line 8
     await testRunner.WhenAsync("I enter username \"QASabreClientAgentAdmin\" and password \"Demo@321@123\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 8
+#line 9
     await testRunner.AndAsync("I click the login button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 9
+#line 10
     await testRunner.ThenAsync("I should be logged in successfully", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

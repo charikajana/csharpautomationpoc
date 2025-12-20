@@ -1,7 +1,8 @@
-@Regression
+@Regression @epic:Authentication @feature:Login
 Feature: Login to Sabre Hotel Booker
 
 @issue:BUG-100 @tms:TC-001 @link:REQ-LOGIN-01 @LoginTest
+@story:Valid_Login @owner:QA-Team @severity:critical
 Scenario: Successful Login new with valid credentials
     Given I navigate to the login page
     When I enter username "QASabreClientAgentAdmin" and password "Demo@321@123"
