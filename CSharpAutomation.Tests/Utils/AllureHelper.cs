@@ -8,7 +8,7 @@ namespace CSharpAutomation.Tests.Utils
 {
     public static class AllureHelper
     {
-        public static void ConfigureAllureEnvironment(string allureResultsDir)
+        public static void ConfigureAllureEnvironment(string allureResultsDir, IConfiguration configuration)
         {
             // Create directories
             Directory.CreateDirectory(allureResultsDir);
@@ -35,12 +35,12 @@ namespace CSharpAutomation.Tests.Utils
             Environment.SetEnvironmentVariable("ALLURE_RESULTS_DIRECTORY", allureResultsDir);
 
             // Create environment.properties file for Allure report
-            CreateEnvironmentProperties(allureResultsDir);
+            CreateEnvironmentProperties(allureResultsDir, configuration);
             
             Logger.Info($"Allure results configured at: {allureResultsDir}");
         }
 
-        private static void CreateEnvironmentProperties(string allureResultsDir)
+        private static void CreateEnvironmentProperties(string allureResultsDir, IConfiguration configuration)
         {
             try
             {
@@ -48,15 +48,15 @@ namespace CSharpAutomation.Tests.Utils
                 var envContent = new StringBuilder();
 
                 // Add environment details
-                envContent.AppendLine($"Browser=Chromium");
-                envContent.AppendLine($"Browser.Headless=false");
+                envContent.AppendLine($"Browser={configuration["Browser"] ?? "Chromium"}");
+                envContent.AppendLine($"Browser.Headless={configuration["Headless"] ?? "false"}");
                 envContent.AppendLine($"OS={Environment.OSVersion}");
                 envContent.AppendLine($"OS.Architecture={RuntimeInformation.OSArchitecture}");
                 envContent.AppendLine($".NET.Version={Environment.Version}");
                 envContent.AppendLine($"Machine.Name={Environment.MachineName}");
                 envContent.AppendLine($"User.Name={Environment.UserName}");
-                envContent.AppendLine($"Test.Environment=QA");
-                envContent.AppendLine($"Base.URL=https://hotelbooker.cert.sabre.com");
+                envContent.AppendLine($"Test.Environment={configuration["Environment"] ?? "QA"}");
+                envContent.AppendLine($"Base.URL={configuration["BaseUrl"] ?? "https://hotelbooker.cert.sabre.com"}");
                 envContent.AppendLine($"Test.Run.Date={DateTime.Now:yyyy-MM-dd HH:mm:ss}");
                 envContent.AppendLine($"Framework=Reqnroll + NUnit + Playwright");
 

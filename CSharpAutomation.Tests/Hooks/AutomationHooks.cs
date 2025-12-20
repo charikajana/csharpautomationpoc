@@ -46,8 +46,22 @@ namespace CSharpAutomation.Tests.Hooks
             _allureResultsDir = Path.Combine(_reportBaseDir, "allure-results");
             _allureReportDir = Path.Combine(_reportBaseDir, "allure-report");
             
+            // Build configuration for static context
+            var environment = Environment.GetEnvironmentVariable("TEST_ENV") ?? "DEV";
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                
+            var envConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "Environments", $"appsettings.{environment}.json");
+            if (File.Exists(envConfigPath))
+            {
+                builder.AddJsonFile(envConfigPath, optional: true, reloadOnChange: true);
+            }
+            
+            var configuration = builder.Build();
+            
             // Configure Allure Environment using Helper
-            AllureHelper.ConfigureAllureEnvironment(_allureResultsDir);
+            AllureHelper.ConfigureAllureEnvironment(_allureResultsDir, configuration);
             
             Logger.Info($"Report directory: {_reportBaseDir}");
             Logger.Separator();
